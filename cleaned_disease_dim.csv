@@ -1,0 +1,7 @@
+disease_id,disease_name,category,severity_level
+053e6868-38d5-4635-9886-598ab9a3935b,Cancer,Severe,Severe
+41c1c940-4847-4687-b180-e5c0f935fbe7,Flu,Infectious,Severe
+6e1a5dcd-2042-42ba-843d-5e2817875654,Asthma,Chronic,Mild
+214742d5-c3f5-4f67-8bd8-0b7fd7950600,Diabetes,Chronic,Mild
+3ab037a9-5927-4bee-8320-80e39a8bcfcc,Heart Disease,Chronic,Mild
+c6b49c0e-d1da-4567-b0d1-323ca00c6e8f,Hypertension,Chronic,Moderate
