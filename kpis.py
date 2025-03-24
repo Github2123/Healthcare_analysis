@@ -1,16 +1,25 @@
 import pymysql
 import pandas as pd
-
+from dotenv import load_dotenv
+import os
 # Database connection details
 import mysql.connector
+
+load_dotenv()
+
+Host=os.getenv('host')
+User=os.getenv('user')
+Password=os.getenv('password')
+Database=os.getenv('database')
 
 # Function to connect to the MySQL database
 def get_db_connection():
     connection = mysql.connector.connect(
-        host="localhost",        # Corrected 'DB_HOST'
-        user="root",             # Corrected 'DB_USER'
-        password="root",      # Corrected 'DB_PASSWORD'
-        database="healthcare"        # Corrected 'DB_NAME'
+        host=Host,       
+        user=User,            
+        password=Password,     
+        database=Database
+       
     )
     return connection
 

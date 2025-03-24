@@ -1,12 +1,22 @@
 import pymysql
+from dotenv import load_dotenv
+import os
 
-# Database connection details
+load_dotenv()
+
+Host=os.getenv('host')
+User=os.getenv('user')
+Password=os.getenv('password')
+Database=os.getenv('database')
+
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "root",
-    "database": "healthcare",
+        "host": Host,       
+        "user":User,            
+        "password":Password,     
+        "database":Database  
 }
+
+
 
 # Tables and their respective ID columns
 TABLES = {
