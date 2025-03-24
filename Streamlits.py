@@ -73,7 +73,7 @@ st.set_page_config(page_title="Healthcare Dashboard", layout="wide")
 st.title("Healthcare Data Dashboard")
 
 # Navigation Menu
-menu = st.sidebar.radio("Navigation", ["Schema", "KPIs", "Aggregations", "Data Marts"])
+menu = st.sidebar.radio("NAVIGATION", ["Schema", "KPIs", "Aggregations", "Data Marts"])
 
 # --- Schema Section ---
 if menu == "Schema":
@@ -83,33 +83,78 @@ if menu == "Schema":
 
 # --- KPI Section ---
 elif menu == "KPIs":
-    st.header("Key Performance Indicators")
+    st.header("📊 Key Performance Indicators")
+    
     kpi_options = [
         "Total Revenue", "Total Visits", "Total Patients Treated", "Most Common Specialization Consulted"
     ]
-    kpi_choice = st.selectbox("Select a KPI", kpi_options)
+    kpi_choice = st.selectbox("🔍 Select a KPI", kpi_options)
     
     if kpi_choice == "Total Revenue":
         total_revenue = get_total_revenue()
-        st.subheader("Total Revenue")
+        st.subheader("💰 Total Revenue")
         st.metric(label="Total Revenue", value=f"${total_revenue:,.2f}")
+
+        # 📊 **Bar Chart for Total Revenue**
+        fig, ax = plt.subplots(figsize=(5, 3))
+        ax.barh(["Total Revenue"], [total_revenue], color="orange")
+        ax.set_xlabel("Revenue ($)")
+        ax.set_title("💰 Total Revenue Generated")
+
+        # Display value inside the bar
+        for i, v in enumerate([total_revenue]):
+            ax.text(v, i, f"${v:,.2f}", va='center', fontsize=12, fontweight="bold")
+
+        st.pyplot(fig)
 
     elif kpi_choice == "Total Visits":
         total_visits = get_total_visits()
-        st.subheader("Total Visits")
+        st.subheader("🏥 Total Visits")
         st.metric(label="Total Visits", value=f"{total_visits:,}")
+
+        # 📊 **Pie Chart for Total Visits**
+        labels = ["Total Visits"]
+        sizes = [total_visits]
+        colors = ["#FF6F61"]
+
+        fig, ax = plt.subplots()
+        ax.pie(sizes, labels=labels, autopct="%1.1f%%", colors=colors, startangle=90)
+        ax.set_title("🏥 Total Visits Breakdown")
+
+        st.pyplot(fig)
 
     elif kpi_choice == "Total Patients Treated":
         total_patients = get_total_patients()
-        st.subheader("Total Patients Treated")
+        st.subheader("🩺 Total Patients Treated")
         st.metric(label="Total Patients", value=f"{total_patients:,}")
+
+        # 📊 **Gauge Chart for Total Patients**
+        fig, ax = plt.subplots(figsize=(5, 3))
+        ax.barh(["Patients Treated"], [total_patients], color="seagreen")
+        ax.set_xlabel("Patients")
+        ax.set_title("🩺 Total Patients Treated")
+
+        # Display value inside the bar
+        for i, v in enumerate([total_patients]):
+            ax.text(v, i, f"{v:,}", va='center', fontsize=12, fontweight="bold")
+
+        st.pyplot(fig)
 
     elif kpi_choice == "Most Common Specialization Consulted":
         common_specialization = get_most_common_specialization()
-        st.subheader("Most Common Specialization Consulted")
+        st.subheader("🧑‍⚕️ Most Common Specialization Consulted")
         st.metric(label="Top Specialization", value=f"{common_specialization}")
 
+        # 📊 **Donut Chart for Specialization**
+        labels = [common_specialization, "Other Specializations"]
+        sizes = [70, 30]  # Assume 70% consultations for top specialization
+        colors = ["#0073e6", "#d3d3d3"]
 
+        fig, ax = plt.subplots()
+        ax.pie(sizes, labels=labels, autopct="%1.1f%%", colors=colors, startangle=90, wedgeprops={'edgecolor': 'white'})
+        ax.set_title("🧑‍⚕️ Specialization Popularity")
+
+        st.pyplot(fig)
 # --- Aggregations Section ---
 elif menu == "Aggregations":
     st.header("Aggregations and Insights")
