@@ -14,14 +14,14 @@ Password=os.getenv('password')
 Database=os.getenv('database')
 
 
-# --- Database Connection ---
+
 def connect_db():
     return pymysql.connect(
         host= Host,       
         user=User,            
         password=Password,     
         database=Database,
-        cursorclass=pymysql.cursors.DictCursor  # Returns results as dictionaries
+        cursorclass=pymysql.cursors.DictCursor  
     )
 
 # Function to execute SQL query
@@ -93,7 +93,7 @@ if menu == "Schema":
 
 # --- KPI Section ---
 elif menu == "KPIs":
-    st.header("📊 Key Performance Indicators")
+    st.header(" Key Performance Indicators")
     
     kpi_options = [
         "Total Revenue", "Total Visits", "Total Patients Treated", "Most Common Specialization Consulted"
